@@ -13,13 +13,11 @@ public class FileReader implements Reader {
     }
 
     @Override
-    public List<String> read(String container) {
+    public List<String> read() {
         try {
             return Files.readAllLines(Path.of(filename));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }

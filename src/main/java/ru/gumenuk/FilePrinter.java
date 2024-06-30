@@ -15,23 +15,12 @@ public class FilePrinter implements Printer {
     }
 
     @Override
-    public void println(String content, List<String> lines)  {
+    public void println(List<String> lines) {
         try {
-            Files.writeString(Path.of(filename), content);
+            Files.write(Path.of(filename), lines);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void error(String error) {
-        try {
-            Files.writeString(Path.of(filename), "[ERROR]: " + error);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-
         }
     }
 }
-
 

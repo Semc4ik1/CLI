@@ -1,10 +1,9 @@
 package ru.gumenuk;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface Printer {
-    void println(String content, List<String> lines) throws IOException;
+    void println(List<String> lines);
 
-    void error(String error);
+
 }

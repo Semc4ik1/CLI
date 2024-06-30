@@ -4,65 +4,48 @@ import org.apache.commons.cli.*;
 
 public class Parser {
 
-    private static final Parser INSTANCE = new Parser();
-    private final  Options options;
-    private Parser() {
-        options = new Options();
-        options.addOption("i", "input", false, "Файл ввода");
-        options.addOption("o", "output", false, "Файл вывода");
+    private static Parser INSTANCE;
+    private final CommandLine cmd;
 
+    private Parser(String[] args) throws ParseException {
+        Options options = new Options();
+        Option inputOption = Option.builder()
+                .option("i")
+                .hasArg()
+                .desc("Файл ввода")
+                .required()
+                .longOpt("input")
+                .numberOfArgs(1)
+                .build();
+        Option outputOption = Option.builder()
+                .option("o")
+                .hasArg()
+                .desc("Файл вывода")
+                .required()
+                .longOpt("output")
+                .numberOfArgs(1)
+                .build();
+        options.addOption(inputOption);
+        options.addOption(outputOption);
+        CommandLineParser commandLineParser = new DefaultParser();
+        cmd = commandLineParser.parse(options, args);
     }
 
-    public static Parser getInstance() {
+
+    public static synchronized Parser getInstance(String[] args) throws ParseException {
+        if (INSTANCE == null) {
+            INSTANCE = new Parser(args);
+        }
         return INSTANCE;
     }
-    public String getInputFile(String[] args){
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = null;
-        try {
-            cmd = parser.parse(options, args);
 
-            if(cmd.hasOption("i")){
-                return cmd.getOptionValue("i");
-            }else {
-                throw new Exception("Нет опции i");
-            }
-
-        } catch (Exception e) {
-            System.err.println("Ошибка при разборе аргументов");
-            System.err.println(e.getMessage());
-            throw new RuntimeException("Ошибка при разборе аргументов: " + e.getMessage());
-        }
-    }
-    public String getOutputFile(String[] args){
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = null;
-        try {
-            cmd = parser.parse(options, args);
-
-            if(cmd.hasOption("o")){
-                return cmd.getOptionValue("o");
-            } else {
-                throw new Exception("Опция 'o' не указана");
-            }
-
-        } catch (Exception e) {
-            System.err.println("Ошибка при разборе аргументов");
-            System.err.println(e.getMessage());
-            throw new RuntimeException("Ошибка при разборе аргументов: " + e.getMessage());
-        }
-    }
-    public String[] getInputFileNames(String[] args) throws ParseException {
-        CommandLineParser cmdParser = new DefaultParser();
-        CommandLine cmd = cmdParser.parse(options, args);
-        return cmd.getOptionValues("-i");
-    }
-    public String getOutputFileName(String[] args) throws ParseException {
-        CommandLineParser cmdParser = new DefaultParser();
-        CommandLine cmd = cmdParser.parse(options, args);
-        return cmd.getOptionValue("-o");
+    public String getInputFile() {
+        return cmd.getOptionValue("i");
     }
 
+    public String getOutputFile() {
+        return cmd.getOptionValue("o");
+    }
 
 
 }
