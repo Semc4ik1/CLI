@@ -13,7 +13,7 @@ public class Parser {
                 .option("i")
                 .hasArg()
                 .desc("Файл ввода")
-                .required()
+               // .required()
                 .longOpt("input")
                 .numberOfArgs(1)
                 .build();
@@ -21,7 +21,7 @@ public class Parser {
                 .option("o")
                 .hasArg()
                 .desc("Файл вывода")
-                .required()
+                //  .required()
                 .longOpt("output")
                 .numberOfArgs(1)
                 .build();

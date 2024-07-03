@@ -2,6 +2,9 @@ package ru.gumenuk;
 
 import org.apache.commons.cli.ParseException;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         try {
@@ -10,11 +13,19 @@ public class Main {
             String output = parser.getOutputFile();
             Reader reader = new FileReader(input);
             Printer printer = new FilePrinter(output);
-            printer.println(reader.read());
+            QuickSort<String> quickSort = new QuickSort<>();
+            List<String> lines = reader.read();
+            quickSort.sort(lines);
+            for (String line : lines) {
+                printer.println(Collections.singletonList(line));
+            }
+
         } catch (ParseException e) {
-            //Вывести в лог сообщение и да и хуй с ним
+
             throw new RuntimeException(e);
         }
+
+
 
     }
 }
