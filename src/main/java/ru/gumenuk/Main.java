@@ -16,9 +16,10 @@ public class Main {
             QuickSort<String> quickSort = new QuickSort<>();
             List<String> lines = reader.read();
             quickSort.sort(lines);
-            for (String line : lines) {
+            printer.println(reader.read());
+            /*for (String line : lines) {
                 printer.println(Collections.singletonList(line));
-            }
+            }*/
 
         } catch (ParseException e) {
 
