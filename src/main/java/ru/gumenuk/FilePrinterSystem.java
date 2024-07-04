@@ -1,5 +1,6 @@
 package ru.gumenuk;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class FilePrinterSystem implements Printer {
@@ -10,6 +11,7 @@ public class FilePrinterSystem implements Printer {
 
     @Override
     public void println(List<String> lines) {
+
         for (String line : lines) {
             System.out.println(line);
         }
