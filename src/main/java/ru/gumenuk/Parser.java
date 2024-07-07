@@ -1,9 +1,11 @@
 package ru.gumenuk;
 
 import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Parser {
-
+    private static final Logger LOGGER = LogManager.getLogger(Parser.class);
     private static Parser INSTANCE;
     private final CommandLine cmd;
 
@@ -13,7 +15,6 @@ public class Parser {
                 .option("i")
                 .hasArg()
                 .desc("Файл ввода")
-               // .required()
                 .longOpt("input")
                 .numberOfArgs(1)
                 .build();
@@ -21,7 +22,6 @@ public class Parser {
                 .option("o")
                 .hasArg()
                 .desc("Файл вывода")
-                //  .required()
                 .longOpt("output")
                 .numberOfArgs(1)
                 .build();
@@ -29,6 +29,7 @@ public class Parser {
         options.addOption(outputOption);
         CommandLineParser commandLineParser = new DefaultParser();
         cmd = commandLineParser.parse(options, args);
+        LOGGER.info("Удалось распарсить командную строку");
     }
 
 
