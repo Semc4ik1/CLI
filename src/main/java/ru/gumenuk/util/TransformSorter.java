@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TransformSorter {
-    public List<String> Sort(SortDataType sortDataType, List<String> inputStrings) throws IllegalAccessException {
+    public List<String> sort(SortDataType sortDataType, List<String> inputStrings)  {
         switch (sortDataType) {
             case INTEGER:
                 return sortIntegers(inputStrings, new IntegerComparator());
@@ -22,7 +22,7 @@ public class TransformSorter {
                 return sortDoubles(inputStrings, new DoubleComparator());
 
             default:
-                throw new IllegalAccessException("Неподдерживаемый тип данных: " + sortDataType);
+                throw new RuntimeException("Неподдерживаемый тип данных: " + sortDataType);
         }
     }
 
