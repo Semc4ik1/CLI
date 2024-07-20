@@ -1,4 +1,4 @@
-package ru.gumenuk;
+package ru.gumenuk.printer;
 
 import java.util.List;
 

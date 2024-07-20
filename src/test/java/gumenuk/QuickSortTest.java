@@ -2,7 +2,7 @@ package gumenuk;
 
 import org.junit.jupiter.api.Test;
 
-import ru.gumenuk.QuickSort;
+import ru.gumenuk.util.QuickSort;
 
 import java.util.ArrayList;
 import java.util.Arrays;

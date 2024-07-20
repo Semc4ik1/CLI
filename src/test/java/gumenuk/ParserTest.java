@@ -2,7 +2,7 @@ package gumenuk;
 
 import org.apache.commons.cli.ParseException;
 import org.junit.jupiter.api.Test;
-import ru.gumenuk.Parser;
+import ru.gumenuk.options.Parser;
 
 import static org.junit.jupiter.api.Assertions.*;
 

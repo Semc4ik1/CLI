@@ -1,4 +1,4 @@
-package ru.gumenuk;
+package ru.gumenuk.printer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
