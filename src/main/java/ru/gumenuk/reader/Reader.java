@@ -1,4 +1,4 @@
-package ru.gumenuk;
+package ru.gumenuk.reader;
 
 import java.util.List;
 
