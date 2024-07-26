@@ -42,9 +42,8 @@ public class Main {
             List<String> lines = reader.read();
 
             TransformSorter transformSorter = new TransformSorter();
-            //Вместо sorted был lines
             List<String> sorted = transformSorter.sort(parseParameters.getDataType(), lines);
-          //  transformSorter.sort(parseParameters.getDataType(), lines);
+            transformSorter.sort(parseParameters.getDataType(), lines);
             LOGGER.info("Сортировка прошла успешно");
             printer.println(sorted);
 

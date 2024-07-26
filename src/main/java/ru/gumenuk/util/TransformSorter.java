@@ -5,7 +5,6 @@ import ru.gumenuk.comparator.IntegerComparator;
 import ru.gumenuk.comparator.StringComparator;
 import ru.gumenuk.convert.ConvertDouble;
 import ru.gumenuk.convert.ConvertInteger;
-import ru.gumenuk.exception.TempConvertException;
 import ru.gumenuk.options.SortDataType;
 
 import java.util.ArrayList;
@@ -14,17 +13,12 @@ import java.util.List;
 
 public class TransformSorter {
     public List<String> sort(SortDataType sortDataType, List<String> inputStrings) {
-        switch (sortDataType) {
-            case INTEGER:
-                return sortIntegers(inputStrings, new IntegerComparator());
-            case STRING:
-                return sortString(inputStrings, new StringComparator());
-            case DOUBLE:
-                return sortDoubles(inputStrings, new DoubleComparator());
-
-            default:
-                throw new RuntimeException("Неподдерживаемый тип данных: " + sortDataType);
-        }
+        return switch (sortDataType) {
+            case INTEGER -> sortIntegers(inputStrings, new IntegerComparator());
+            case STRING -> sortString(inputStrings, new StringComparator());
+            case DOUBLE -> sortDoubles(inputStrings, new DoubleComparator());
+            default -> throw new UnsupportedOperationException("Неподдерживаемый тип данных: " + sortDataType);
+        };
     }
 
     private List<String> sortString(List<String> lines, StringComparator comparator) {
@@ -37,12 +31,10 @@ public class TransformSorter {
         List<Integer> integers = new ArrayList<>();
 
         for (String s : integersAsString) {
-            try {
-                Integer integer = convertInteger.convert(String.valueOf(s));
-                integers.add(integer);
-            } catch (TempConvertException e) {
-                throw new RuntimeException(e);
-            }
+
+            Integer integer = convertInteger.convert(String.valueOf(s));
+            integers.add(integer);
+
         }
 
         QuickSort.sort(integers, comparator);
@@ -61,12 +53,8 @@ public class TransformSorter {
         List<Double> doubles = new ArrayList<>();
 
         for (String s : doublesAsString) {
-            try {
-                Double doubleValue = convertDouble.convert(s);
-                doubles.add(doubleValue);
-            } catch (TempConvertException e) {
-                throw new RuntimeException(e);
-            }
+            Double doubleValue = convertDouble.convert(s);
+            doubles.add(doubleValue);
         }
 
         QuickSort.sort(doubles, comparator);

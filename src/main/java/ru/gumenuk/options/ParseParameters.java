@@ -12,7 +12,7 @@ public class ParseParameters {
     }
 
     public void setDataType(SortDataType dataType) {
-        this.dataType = dataType;
+        this.dataType = SortDataType.STRING;
     }
 
     public String getOutputFileName() {

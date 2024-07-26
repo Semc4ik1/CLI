@@ -2,50 +2,61 @@ package gumenuk;
 
 import org.junit.jupiter.api.Test;
 
+import ru.gumenuk.comparator.IntegerComparator;
+import ru.gumenuk.comparator.StringComparator;
 import ru.gumenuk.util.QuickSort;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+
 import java.util.List;
 
-import static java.util.Collections.sort;
 import static org.junit.jupiter.api.Assertions.*;
 
- class QuickSortTest {
-    @Test
-     void quickSort_stringListShouldIsEmpty(){
-        QuickSort<String> quickSort = new QuickSort<>();
-        List<String> list = new ArrayList<>();
-        quickSort.sort(list);
-        assertTrue(list.isEmpty());
-    }
-    @Test
-     void quickSort_shouldMustBeSortedInAscendingOrder(){
-        List<Integer> list = new ArrayList<>(List.of(2, 75, 1000, 54, 200));
-        List<Integer> expected = List.of(2, 54, 75, 200, 1000);
-        QuickSort<Integer> quickSort = new QuickSort<>();
-        quickSort.sort(list);
+class QuickSortTest {
 
-        assertArrayEquals(expected.toArray(), list.toArray());
-    }
     @Test
-    void quickSort_duplicateShouldRemainsInPlace(){
-       List<Integer> duplicatesList = new ArrayList<>(Arrays.asList(5, 5, 5, 5, 5));
-       sort(duplicatesList);
-
-       assertEquals(Arrays.asList(5, 5, 5, 5, 5), duplicatesList);
+    void quickSort_allEmptyStringsShouldRemainUnchanged() {
+        List<String> emptyStrings = Arrays.asList("", "", "", "");
+        StringComparator stringComparator = new StringComparator();
+        QuickSort.sort(emptyStrings, stringComparator);
+        List<String> expectedResult = Arrays.asList("", "", "", "");
+        assertArrayEquals(expectedResult.toArray(), emptyStrings.toArray());
     }
+
     @Test
-    void quickSort_negativeNumbersShouldBeInAscendingOrder(){
-       List<Integer> negativeNumbersList = new ArrayList<>(Arrays.asList(-5, -8, -1, -6, -3, -7, -2, -4));
-       sort(negativeNumbersList);
-
-       assertEquals(Arrays.asList(-8, -7, -6, -5, -4, -3, -2, -1), negativeNumbersList );
+    void quickSort_shouldMustBeSortedInAscendingOrder() {
+        List<Integer> numbers = Arrays.asList(5, 3, 8, 1, 6, 2, 7, 4);
+        IntegerComparator integerComparator = new IntegerComparator();
+        QuickSort.sort(numbers, integerComparator);
+        List<Integer> expectedSortedNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+        assertArrayEquals(expectedSortedNumbers.toArray(), numbers.toArray());
     }
+
+    @Test
+    void quickSort_duplicateShouldRemainsInPlace() {
+        List<Integer> numbers = Arrays.asList(1, 3, 2, 5, 6, 4, 3, 3);
+        IntegerComparator integerComparator = new IntegerComparator();
+        QuickSort.sort(numbers, integerComparator);
+        List<Integer> expectedSortedNumbers = Arrays.asList(1, 2, 3, 3, 3, 4, 5, 6);
+        assertArrayEquals(expectedSortedNumbers.toArray(), numbers.toArray());
+    }
+
+    @Test
+    void quickSort_negativeNumbersShouldBeInAscendingOrder() {
+        List<Integer> numbers = Arrays.asList(-5, -3, -8, -1, -6, -2, -7, -4);
+        IntegerComparator integerComparator = new IntegerComparator();
+        QuickSort.sort(numbers, integerComparator);
+        List<Integer> expectedSortedNumbers = Arrays.asList(-8, -7, -6, -5, -4, -3, -2, -1);
+        assertArrayEquals(expectedSortedNumbers.toArray(), numbers.toArray());
+    }
+
     @Test
     public void quickSort_testStringShouldMustBeInAlphabeticalOrder() {
-       List<String> testStrings = Arrays.asList("Banana", "Apple", "Elderberry", "Date", "Cherry");
-       sort(testStrings);
-       assertEquals(Arrays.asList("Apple", "Banana", "Cherry", "Date", "Elderberry"), testStrings);
+
+        List<String> strings = Arrays.asList("Banana", "Apple", "Elderberry", "Date", "Cherry");
+        StringComparator stringComparator = new StringComparator();
+        QuickSort.sort(strings, stringComparator);
+        List<String> expectedSortedStrings = List.of("Apple", "Banana", "Cherry", "Date", "Elderberry");
+        assertArrayEquals(expectedSortedStrings.toArray(), strings.toArray());
     }
 }

@@ -47,7 +47,6 @@ public class Parser {
         options.addOptionGroup(optionGroup);
         options.addOption(inputOption);
         options.addOption(outputOption);
-        options.addOption("h", "help", false, "Выводит справку");
         CommandLineParser commandLineParser = new DefaultParser();
         cmd = commandLineParser.parse(options, args);
         LOGGER.info("Удалось распарсить командную строку");
@@ -77,8 +76,5 @@ public class Parser {
         return params;
     }
 
-    private static void printHelp(HelpFormatter formatter, Options options) {
-        formatter.printHelp("Ваша программа", options);
 
-    }
 }
