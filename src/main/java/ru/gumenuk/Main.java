@@ -5,8 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.gumenuk.options.ParseParameters;
 import ru.gumenuk.options.Parser;
-import ru.gumenuk.options.SortDataType;
-import ru.gumenuk.util.QuickSort;
 import ru.gumenuk.printer.ConsolePrinter;
 import ru.gumenuk.printer.FilePrinter;
 import ru.gumenuk.printer.Printer;
