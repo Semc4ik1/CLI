@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TransformSorterTest {
+class TransformSorterTest {
     @Test
     void transformSort_ShouldConvertAndSortIntegersInAscendingOrder() {
         List<String> integersAsString = Arrays.asList("5", "3", "8", "1", "6", "2", "7", "4");

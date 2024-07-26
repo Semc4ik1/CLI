@@ -2,8 +2,7 @@ package ru.gumenuk.options;
 
 public class ParseParameters {
 
-
-    private SortDataType dataType;
+    private SortDataType dataType = SortDataType.STRING;
     private String outputFileName = "out.txt";
     private String inputFileName;
 
@@ -12,7 +11,7 @@ public class ParseParameters {
     }
 
     public void setDataType(SortDataType dataType) {
-        this.dataType = SortDataType.STRING;
+        this.dataType = dataType;
     }
 
     public String getOutputFileName() {

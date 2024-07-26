@@ -51,7 +51,7 @@ class QuickSortTest {
     }
 
     @Test
-    public void quickSort_testStringShouldMustBeInAlphabeticalOrder() {
+    void quickSort_testStringShouldMustBeInAlphabeticalOrder() {
 
         List<String> strings = Arrays.asList("Banana", "Apple", "Elderberry", "Date", "Cherry");
         StringComparator stringComparator = new StringComparator();
