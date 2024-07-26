@@ -44,9 +44,11 @@ public class Main {
             List<String> lines = reader.read();
 
             TransformSorter transformSorter = new TransformSorter();
-            transformSorter.sort(parseParameters.getDataType(), lines);
+            //Вместо sorted был lines
+            List<String> sorted = transformSorter.sort(parseParameters.getDataType(), lines);
+          //  transformSorter.sort(parseParameters.getDataType(), lines);
             LOGGER.info("Сортировка прошла успешно");
-            printer.println(lines);
+            printer.println(sorted);
 
         } catch (ParseException e) {
             LOGGER.error("Произошла ошибка: {}", e.getMessage());

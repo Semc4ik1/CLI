@@ -2,6 +2,7 @@ package ru.gumenuk.util;
 
 import ru.gumenuk.comparator.DoubleComparator;
 import ru.gumenuk.comparator.IntegerComparator;
+import ru.gumenuk.comparator.StringComparator;
 import ru.gumenuk.convert.ConvertDouble;
 import ru.gumenuk.convert.ConvertInteger;
 import ru.gumenuk.exception.TempConvertException;
@@ -12,12 +13,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TransformSorter {
-    public List<String> sort(SortDataType sortDataType, List<String> inputStrings)  {
+    public List<String> sort(SortDataType sortDataType, List<String> inputStrings) {
         switch (sortDataType) {
             case INTEGER:
                 return sortIntegers(inputStrings, new IntegerComparator());
             case STRING:
-                return inputStrings;
+                return sortString(inputStrings, new StringComparator());
             case DOUBLE:
                 return sortDoubles(inputStrings, new DoubleComparator());
 
@@ -26,13 +27,18 @@ public class TransformSorter {
         }
     }
 
+    private List<String> sortString(List<String> lines, StringComparator comparator) {
+        QuickSort.sort(lines, comparator);
+        return lines;
+    }
+
     private List<String> sortIntegers(List<String> integersAsString, IntegerComparator comparator) {
         ConvertInteger convertInteger = new ConvertInteger();
         List<Integer> integers = new ArrayList<>();
 
         for (String s : integersAsString) {
             try {
-                Integer integer = convertInteger.convert(s);
+                Integer integer = convertInteger.convert(String.valueOf(s));
                 integers.add(integer);
             } catch (TempConvertException e) {
                 throw new RuntimeException(e);
@@ -47,6 +53,7 @@ public class TransformSorter {
         }
 
         return sortedStrings;
+
     }
 
     private List<String> sortDoubles(List<String> doublesAsString, Comparator<Double> comparator) {
